@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include "ADCsetup.c"
+#include "Setupfunctions.h""
 
 int main(void) {
  
