@@ -13,5 +13,5 @@ GPIOB->MODER &= 0xFFFF0000;
 GPIOB->MODER |= 0x00001540;
 GPIOA->AFR[0] &= 0xFFFFFFF0;
 GPIOA->AFR[0] |= 0x00000001;
-
+//This is a test to see if pulling the entire project will work
 }
