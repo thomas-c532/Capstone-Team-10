@@ -1,2 +1,3 @@
-void ADCsetup(void);
 void Pinsetup(void);
+void ADCsetup(void);
+
