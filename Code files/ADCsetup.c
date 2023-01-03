@@ -14,6 +14,6 @@ void ADCsetup(void){
 RCC-> APB2ENR |= (0x00000100); /*Sets the bit associated with the ADC1 clock (bit 8) to true*/
 				/*GPIO clocks are enabled in the pin setup, redundant*/
 
-// This is a test for the GITHUB repository 2
+
 
 }

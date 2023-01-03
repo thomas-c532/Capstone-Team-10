@@ -1,6 +1,7 @@
 #include "stm32f4xx.h"
 
 void PinSetup(void){
+
 		RCC->AHB2ENR |= 0x01; 
 		GPIOA->MODER  &= 0x00000001;
 		RCC->APB1ENR |= (0x0000001);						 /*enables TIM2 from Reset and Clock Control Register*/
@@ -13,4 +14,9 @@ void PinSetup(void){
 	TIM2->CCR1 = (0x0238*0.5);
 	NVIC_EnableIRQ(TIM2_IRQn); 
 	NVIC_ClearPendingIRQ(TIM2_IRQn);
+
+
+
+	
+
 }
