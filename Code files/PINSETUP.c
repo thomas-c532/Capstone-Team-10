@@ -2,7 +2,7 @@
 
 void PinSetup(void){
 
-		RCC->AHB2ENR |= 0x00000007; 			/*Enable the clock for I/O ports A,B, and C*/
+		RCC->AHB1ENR |= 0x00000007; 			/*Enable the clock for I/O ports A,B, and C*/
 	
 		/*PINS ON CN10 BUS*/
 		GPIOB->MODER &= 0x00FFFFC3;			/*Clearing PB1,2,13,14, and 15. Also clears PB12*/
