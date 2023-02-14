@@ -69,7 +69,7 @@ void TIMERSETUP(void)
 
 			Moved comments around for readability; removed the TIMER 6 section and replaced it with TIMER 9, as the STM32F401RE does not have
 			a TIM6. Changed the library above from stm32l432xx.h to stm32f4xx.h. Added a function prototype for function TIMERSETUP. Fixed issues
-			concerning enabling TIM9 from RCC and enabling interrupts from TIM9. */
+			concerning enabling TIM9 from RCC and enabling interrupts from TIM9.*/
 
 
 
