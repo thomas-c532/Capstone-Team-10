@@ -2,6 +2,7 @@
 
 void PinSetup(void);
 
+
 //void PinSetup(void)
 //{
 //	RCC->AHB1ENR |= 0x00000007; 		/*Enable the clock for I/O ports A,B, and C*/
@@ -46,7 +47,6 @@ void PinSetup(void)
 	GPIOB->AFR[0] |= 0x20000000;		/*Sets PB7 to alternate function 2; 0010 xxxx xxxx xxxx xxxx xxxx xxxx xxxx*/
 	GPIOC->MODER &= 0xFFFFFCFF;			/*Sets PC4 to input; xxxx xxxx xxxx xxxx xxxx xx00 xxxx xxxx*/
 	GPIOC->MODER |= 0x00000300;     /*Sets PC4 to analog; xxxx xxxx xxxx xxxx xx11 xxxx xxxx xxxx*/
-}
 
 		
 /*
