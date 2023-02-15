@@ -26,6 +26,17 @@ void PinSetup(void);
 //	GPIOC->MODER |= 0x54000050;			/*Setting PC2, 3, 13, 14, 15 to outputs; 0101 01xx xxxx xxxx xxxx xxxx 0101 xxxx*/
 //}
 
+		
+/*
+SERVOS:														PC 2, 3, 13, 14, 15									ALL OUTPUTS, PWM GENERATORS
+FLEX SENSORS:											PB 1, 2, 13, 14, 15									ALL ANALOG
+FORCE SENSORS:										PA 2, 3, 13, 14, 15									ALL ANALOG
+VIBROTACTORS:											PB 12 (ADD MORE LATER IF DESIRED)
+WRIST SENSOR (BACKUP): 						PC 4
+WRIST MOTOR (BACKUP):							PB 7
+*/
+
+
 void PinSetup(void)
 {
 	RCC->AHB1ENR |= 0x00000007; 		/*Enable the clock for I/O ports A,B, and C*/
@@ -48,15 +59,6 @@ void PinSetup(void)
 	GPIOC->MODER |= 0x00000300;     /*Sets PC4 to analog; xxxx xxxx xxxx xxxx xx11 xxxx xxxx xxxx*/
 }
 
-		
-/*
-SERVOS:														PC 2, 3, 13, 14, 15									ALL OUTPUTS, PWM GENERATORS
-FLEX SENSORS:											PB 1, 2, 13, 14, 15									ALL ANALOG
-FORCE SENSORS:										PA 2, 3, 13, 14, 15									ALL ANALOG
-VIBROTACTORS:											PB 12 (ADD MORE LATER IF DESIRED)
-WRIST SENSOR (BACKUP): 						PC 4
-WRIST MOTOR (BACKUP):							PB 7
-*/
 
 /*
 SERVOS
