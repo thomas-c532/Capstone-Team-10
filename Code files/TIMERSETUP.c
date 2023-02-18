@@ -40,7 +40,7 @@ Servos:	 PB4 -> TIM3 CH1
 	 PB6 -> TIM4 CH1
 	 PB8 -> TIM4 CH3
 	 PB9 -> TIM4 CH4
-Wrist.M: PB7 -> TIM4 CH2
+Wrist.M: PB7 -> TIM4 CH2 */
   }
 
 	
