@@ -5,7 +5,7 @@ void TIMERSETUP(void);
 
 void TIMERSETUP(void) 
 {
-  RCC->APB1ENR |= (0x0000000F);						/*enables TIM 2, 3, 4, and 5 from Reset clock control*/	
+  RCC->APB1ENR |= (0x00000006);						/*enables TIM 2, 3, 4, and 5 from Reset clock control*/	
   	
 	/* TIMER 3 */
 	TIM3->CR1 |= (0x0081); 						/*Turns on the ARR preload feature, and enables the counter*/
