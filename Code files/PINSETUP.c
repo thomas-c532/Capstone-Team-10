@@ -23,15 +23,6 @@ void PinSetup(void)
 	GPIOC->MODER &= 0xFFFFFCFF;			/*Sets PC4 to input; xxxx xxxx xxxx xxxx xxxx xx00 xxxx xxxx*/
 	GPIOC->MODER |= 0x00000300;     /*Sets PC4 to analog; xxxx xxxx xxxx xxxx xx11 xxxx xxxx xxxx*/
 
-		
-/*
-SERVOS:														PC 2, 3, 13, 14, 15									ALL OUTPUTS, PWM GENERATORS
-FLEX SENSORS:											PB 1, 2, 13, 14, 15									ALL ANALOG
-FORCE SENSORS:										PA 2, 3, 13, 14, 15									ALL ANALOG
-VIBROTACTORS:											PB 12 (ADD MORE LATER IF DESIRED)
-WRIST SENSOR (BACKUP): 						PC 4
-WRIST MOTOR (BACKUP):							PB 7
-*/
 
 /*
 SERVOS
@@ -59,3 +50,5 @@ PC4 -> ADC1_14
 WR.MOTOR
 PB7 -> TIM4 CH2
 */
+
+}
