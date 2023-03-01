@@ -1,8 +1,8 @@
 #include "stm32f4xx.h"
 
-void PinSetup(void);
+void PINSETUP(void);
 
-void PinSetup(void)
+void PINSETUP(void)
 {
 	RCC->AHB1ENR |= 0x00000007; 		/*Enable the clock for I/O ports A,B, and C*/
 	
