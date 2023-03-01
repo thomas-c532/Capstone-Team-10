@@ -1,74 +1,22 @@
 #include "stm32f4xx.h"
 
-void DMASETUP(void);
+void DMASETUP(uint32_t Storage);
 
-void DMASETUP(void) 
+void DMASETUP(uint32_t Storage) 
 {
   
+	RCC->AHB1ENR |= 0x00400000; 												/*DMA2 Clock Enabled; xxxx xxxx xx1x xxxx xxxx xxxx xxxx xxxx*/
   
- /*Setup for TIM3CH1 (STREAM 4, CHANNEL 5)*/
-	DMA1_Stream4->CR &= 0xF0100000;   /*Clearing bits 27:0, excluding bit 20*/
-	DMA1_Stream4->CR |= 0x0A020144;   /*Setting config bits for the DMA. Bit 0 (Enable bit) needs to be set later*/
-	DMA1_Stream4->NDTR |= 0x00000000; /*Insert random number here. Sets the number of data items to transfer, but shouldn't matter in circular mode*/
-	DMA1_Stream4->PAR &= 0x00000000;
-	DMA1_Stream4->PAR |= 0x00000000; /*THIS IS A FILLER ADDRESS*/
-	DMA1_Stream4->M0AR &= 0x00000000;
-	DMA1_Stream4->M0AR |= 0x00000000; /*THIS IS A FILLER ADDRESS*/
-	DMA1_Stream4->FCR &= 0xFFFFFF7B;
-	DMA1_Stream4->CR |= 0x00000001;   /*Enables stream 4*/
+/*Setup for ADC1 (STREAM 0, CHANNEL 0)*/
+	DMA2_Stream0->CR |= 0x00020500;   									/* xxxx 000x xxxx xx10 x000 01x1 00xx xxxx*/
+																											/*(WITH ABOVE) Channel 0 selected [27:25], Priority Level High [17:16]*/
+																											/*(WITH ABOVE) Memory and Peripheral Sizes set to Byte [14:11]*/
+																											/*(WITH ABOVE) Memory Address Incrementation Enabled [10] and Circular Mode Enabled [8]*/
+																											/*(WITH ABOVE) Direction of data movement set to Peripheral-to-Memory [7:6]*/
+	DMA2_Stream0->NDTR |= 0x0000000A; 									/*Total number of converted channels in ADC: 10; xxxx xxxx xxxx xxxx 0000 0000 0000 1010*/
+	DMA2_Stream0->PAR = (uint32_t) &ADC1->DR; 					/*Pointer to ADC1 Peripheral Data Register Address*/
+	DMA2_Stream0->M0AR = Storage; 											/*Address of memory element (variable)*/
 	
-/*Setup for TIM3CH2 (STREAM 5, CHANNEL 5)*/
-	DMA1_Stream5->CR &= 0xF0100000;   /*Clearing bits 27:0, excluding bit 20*/
-	DMA1_Stream5->CR |= 0x0A020144;   /*Setting config bits for the DMA. Bit 0 (Enable bit) needs to be set later*/
-	DMA1_Stream5->NDTR |= 0x00000000; /*Insert random number here. Sets the number of data items to transfer, but shouldn't matter in circular mode*/
-	DMA1_Stream5->PAR &= 0x00000000;
-	DMA1_Stream5->PAR |= 0x00000000; /*THIS IS A FILLER ADDRESS*/
-	DMA1_Stream5->M0AR &= 0x00000000;
-	DMA1_Stream5->M0AR |= 0x00000000; /*THIS IS A FILLER ADDRESS*/
-	DMA1_Stream5->FCR &= 0xFFFFFF7B;  
-	DMA1_Stream5->CR |= 0x00000001;   /*Enables stream 5*/
- 
-/*Setup for TIM4CH1 (STREAM 0, CHANNEL 2)*/
-	DMA1_Stream0->CR &= 0xF0100000;   /*Clearing bits 27:0, excluding bit 20*/
-	DMA1_Stream0->CR |= 0x04020144;   /*Setting config bits for the DMA. Bit 0 (Enable bit) needs to be set later*/
-	DMA1_Stream0->NDTR |= 0x00000000; /*Insert random number here. Sets the number of data items to transfer, but shouldn't matter in circular mode*/
-	DMA1_Stream0->PAR &= 0x00000000;
-	DMA1_Stream0->PAR |= 0x00000000; /*THIS IS A FILLER ADDRESS*/
-	DMA1_Stream0->M0AR &= 0x00000000;
-	DMA1_Stream0->M0AR |= 0x00000000; /*THIS IS A FILLER ADDRESS*/
-	DMA1_Stream0->FCR &= 0xFFFFFF7B;
-	DMA1_Stream0->CR |= 0x00000001;   /*Enables stream 0*/
-  
-/*Setup for TIM4CH3 (STREAM 7, CHANNEL 2)*/
-	DMA1_Stream7->CR &= 0xF0100000;   /*Clearing bits 27:0, excluding bit 20*/
-	DMA1_Stream7->CR |= 0x04020144;   /*Setting config bits for the DMA. Bit 0 (Enable bit) needs to be set later*/
-	DMA1_Stream7->NDTR |= 0x00000000; /*Insert random number here. Sets the number of data items to transfer, but shouldn't matter in circular mode*/
-	DMA1_Stream7->PAR &= 0x00000000;
-	DMA1_Stream7->PAR |= 0x00000000; /*THIS IS A FILLER ADDRESS*/
-	DMA1_Stream7->M0AR &= 0x00000000;
-	DMA1_Stream7->M0AR |= 0x00000000; /*THIS IS A FILLER ADDRESS*/
-	DMA1_Stream7->FCR &= 0xFFFFFF7B;
-	DMA1_Stream7->CR |= 0x00000001;   /*Enables stream 7*/
- 
-/*Setup for TIM4CH4 (STREAM 6, CHANNEL 2)*/
-	DMA1_Stream6->CR &= 0xF0100000;   /*Clearing bits 27:0, excluding bit 20*/
-	DMA1_Stream6->CR |= 0x04020144;   /*Setting config bits for the DMA. Bit 0 (Enable bit) needs to be set later*/
-	DMA1_Stream6->NDTR |= 0x00000000; /*Insert random number here. Sets the number of data items to transfer, but shouldn't matter in circular mode*/
-	DMA1_Stream6->PAR &= 0x00000000;
-	DMA1_Stream6->PAR |= 0x00000000; /*THIS IS A FILLER ADDRESS*/
-	DMA1_Stream6->M0AR &= 0x00000000;
-	DMA1_Stream6->M0AR |= 0x00000000; /*THIS IS A FILLER ADDRESS*/
-	DMA1_Stream6->FCR &= 0xFFFFFF7B;
-	DMA1_Stream6->CR |= 0x00000001;   /*Enables stream 6*/
- 
-/*Setup for TIM4CH2 (STREAM 3, CHANNEL 2)*/
-	DMA1_Stream3->CR &= 0xF0100000;   /*Clearing bits 27:0, excluding bit 20*/
-	DMA1_Stream3->CR |= 0x04020144;   /*Setting config bits for the DMA. Bit 0 (Enable bit) needs to be set later*/
-	DMA1_Stream3->NDTR |= 0x00000000; /*Insert random number here. Sets the number of data items to transfer, but shouldn't matter in circular mode*/
-	DMA1_Stream3->PAR &= 0x00000000;
-	DMA1_Stream3->PAR |= 0x00000000; /*THIS IS A FILLER ADDRESS*/
-	DMA1_Stream3->M0AR &= 0x00000000;
-	DMA1_Stream3->M0AR |= 0x00000000; /*THIS IS A FILLER ADDRESS*/
-	DMA1_Stream3->FCR &= 0xFFFFFF7B;
-	DMA1_Stream3->CR |= 0x00000001;   /*Enables stream 3*/
+	DMA2_Stream0->CR |= 0x00000001;   									/*Enables stream 0*/
+
 }
