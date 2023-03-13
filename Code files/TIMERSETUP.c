@@ -9,10 +9,10 @@ void TIMERSETUP(void)
 	/* TIMER 3 */
 	TIM3->CR1 &= (0xFC00);
 	TIM3->CR1 |= (0x0081); 						/*Turns on the ARR preload feature, and enables the counter*/
-	//TIM3->DIER &= (0xA0AE);						/*Clearing bits 14,12,11,10,9,8,and 1*/
-	//TIM3->DIER |= (0x5F01);						/*Enables DMA request updates (X1X1 1111 X0X0 0001) */
-	//TIM3->EGR &= (0xFFE1);						/*Clearing bits 4,3,2, and 1*/
-	//TIM3->EGR |= (0x001E);						/*Setting bits so multiple channels can be used from single timer (XXXX XXXX XXX1 111X) */
+	TIM3->DIER &= (0xA0AE);						/*Clearing bits 14,12,11,10,9,8,and 1*/
+	TIM3->DIER |= (0x5F01);						/*Enables DMA request updates (X1X1 1111 X0X0 0001) */
+	TIM3->EGR &= (0xFFE1);						/*Clearing bits 4,3,2, and 1*/
+	TIM3->EGR |= (0x001E);						/*Setting bits so multiple channels can be used from single timer (XXXX XXXX XXX1 111X) */
 	TIM3->CCER &= (0x4444);             			        /*Clears the bits in the CCER so the output can be set active high*/
 	TIM3->CCER |= (0x1111); 					/*Enables capture/compare output to be active high, and to activate the output (0X01 0X01 0X01 0X01) */
 	TIM3->CCMR1 &= (0xFFFF); 					  /*Clears and sets necissary bits for capture/control mode reg. for PWM mode 1.*/
@@ -25,10 +25,10 @@ void TIMERSETUP(void)
 	NVIC_ClearPendingIRQ(TIM3_IRQn); 
 	/* TIMER 4*/
 	TIM4->CR1 |= (0x0081); 						/*Turns on the ARR preload feature, and enables the counter*/
-	//TIM4->DIER &= (0xA0AE);						/*Clearing bits 14,12,11,10,9,8,and 1*/
-	//TIM4->DIER |= (0x5F01);						/*Enables DMA request updates (X1X1 1111 X0X0 0001) */
-	//TIM4->EGR &= (0xFFE1);						/*Clearing bits 4,3,2, and 1*/
-	//TIM4->EGR |= (0x001E);						/*Setting bits so multiple channels can be used from single timer (XXXX XXXX XXX1 111X) */
+	TIM4->DIER &= (0xA0AE);						/*Clearing bits 14,12,11,10,9,8,and 1*/
+	TIM4->DIER |= (0x5F01);						/*Enables DMA request updates (X1X1 1111 X0X0 0001) */
+	TIM4->EGR &= (0xFFE1);						/*Clearing bits 4,3,2, and 1*/
+	TIM4->EGR |= (0x001E);						/*Setting bits so multiple channels can be used from single timer (XXXX XXXX XXX1 111X) */
 	TIM4->CCER &= (0x4444);             			        /*Clears the bits in the CCER so the output can be set active high*/
 	TIM4->CCMR1 &= (0xFFFF); 					  /*Clears and sets necissary bits for capture/control mode reg. for PWM mode 1.*/
 	TIM4->CCMR1 |= (0x6868);   					 /*Sets hex LSB to zero to configure to output mode*/
@@ -52,6 +52,28 @@ Servos:	 PB4 -> TIM3 CH1
 	 PB8 -> TIM4 CH3
 	 PB9 -> TIM4 CH4
 Wrist.M: PB7 -> TIM4 CH2 */
+	/* TIMER 5*/
+	TIM5->CR1 |= (0x0081); 						/*Turns on the ARR preload feature, and enables the counter*/
+	TIM5->DIER &= (0xA0AE);						/*Clearing bits 14,12,11,10,9,8,and 1*/
+	TIM5->DIER |= (0x5F01);						/*Enables DMA request updates (X1X1 1111 X0X0 0001) */
+	TIM5->EGR &= (0xFFE1);						/*Clearing bits 4,3,2, and 1*/
+	TIM5->EGR |= (0x001E);						/*Setting bits so multiple channels can be used from single timer (XXXX XXXX XXX1 111X) */
+	TIM5->CCER &= (0x4444);             			        /*Clears the bits in the CCER so the output can be set active high*/
+	TIM5->CCMR1 &= (0xFFFF); 					  /*Clears and sets necissary bits for capture/control mode reg. for PWM mode 1.*/
+	TIM5->CCMR1 |= (0x6868);   					 /*Sets hex LSB to zero to configure to output mode*/
+	TIM5->CCMR2 &= (0xFFFF);
+	TIM5->CCMR2 |= (0x6868);
+	TIM5->CCER |= (0x1111); 					/*Enables capture/compare output to be active high, and to activate the output (0X01 0X01 0X01 0X01) */
+	TIM5->PSC = (0x0201);
+	TIM5->ARR = (0x00CF);
+	TIM5->CCR1 = (0x004E);
+	TIM5->CCR2 = (0x0020);
+	TIM5->CCR3 = (0x0018);
+	TIM5->CCR4 = (0x0035);
+	NVIC_EnableIRQ(TIM5_IRQn);          					  /*Enables to interrupt to trigger for every clock pulse of the TIMER*/
+	NVIC_ClearPendingIRQ(TIM5_IRQn); 
+
+
   }
 
 
