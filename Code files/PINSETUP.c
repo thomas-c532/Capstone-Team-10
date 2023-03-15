@@ -23,6 +23,11 @@ void PINSETUP(void)
 	GPIOC->MODER &= 0xFFFFFCFF;			/*Sets PC4 to input; xxxx xxxx xxxx xxxx xxxx xx00 xxxx xxxx*/
 	GPIOC->MODER |= 0x00000300;     /*Sets PC4 to analog; xxxx xxxx xxxx xxxx xx11 xxxx xxxx xxxx*/
 
+	
+	/*ADDITIONAL PIN CODE. MERGE WITH ABOVE CODE ONCE VERIFIED*/
+	GPIOA->MODER &= 0x3F00FFFF;		
+	GPIOA->MODER |= 0x80AA0000;			/*Sets PA8,9,10,11,15 to alternate function; 10xx xxxx 1010 1010 xxxx xxxx xxxx xxxx*/
+	GPIOA->AFR[1] |= 0x10001111;                    /*Sets PA8,9,10,11,15 to AF1; 0001 0000 0000 0000 0001 0001 0001 0001*/
 
 /*
 SERVOS
@@ -43,6 +48,13 @@ PA6 -> ADC1_IN6
 PA7 -> ADC1_IN7
 PB0 -> ADC1_IN8
 PB1 -> ADC1_IN9
+
+Vibrotactors
+PA8-> TIM1 CH1
+PA9-> TIM1 CH2
+PA10->TIM1 CH3
+PA11->TIM1 CH4
+PA15->TIM2 CH1
 
 WR.S
 PC4 -> ADC1_14
