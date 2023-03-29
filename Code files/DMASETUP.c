@@ -20,3 +20,5 @@ void DMASETUP(uint32_t Storage)
 	DMA2_Stream0->CR |= 0x00000001;   									/*Enables stream 0*/
 
 }
+
+
